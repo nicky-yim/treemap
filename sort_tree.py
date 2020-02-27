@@ -19,7 +19,7 @@ def _sort_tree(L, start, end):
     sorted in descending order.'''
 
     if end - start > 1:
-        mid = (start + end) / 2
+        mid = (start + end) // 2
         _sort_tree(L, start, mid)
         _sort_tree(L, mid, end)
         _sort(L, start, mid, end)
