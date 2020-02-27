@@ -14,16 +14,20 @@ def build_tree(f, d):
     based on directory d's Folder class, f.
     Return the total size of the directory d.'''
 
-    for filename in os.listdir(d):
-        path = os.path.join(d, filename)
-        size = os.path.getsize(path)
-        if os.path.isdir(path):
-            folder = Folder(path, size)
-            f.files.append(folder)
-            f.size += build_tree(folder, path)
-        else:
-            f.size += size
-            f.files.append(File(path, size))
+    try:
+        for filename in os.listdir(d):
+            path = os.path.join(d, filename)
+            size = os.path.getsize(path)
+            if os.path.isdir(path):
+                folder = Folder(path, size)
+                f.files.append(folder)
+                f.size += build_tree(folder, path)
+            else:
+                f.size += size
+                f.files.append(File(path, size))
+    except:
+        # Just skip if access is denied
+        pass
     return f.size
 
 
